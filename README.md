@@ -95,6 +95,28 @@ stays shortened (max dwell 5.5 s) and no dwell flag fired. This run is
 kept as `mall-shoplifting-detection-demo-crowded.mp4`. The simulation
 run is where the full four-signal chain is demonstrated end to end.
 
+**Real footage — small-group segment (same mall clip, seconds
+9.0–29.0, full frame 1280×720, 20.0 s / 611 frames, default settings;
+segment saved as `real-footage/retail-smallshop-segment.mp4`):** the
+window was picked by scanning every frame of the mall clip with the
+same detector — in this window the engine typically sees a small
+group of ground-floor shoppers (median 7 people per frame, mean 7.4,
+three quarters of frames between 6 and 9), between the 1-person
+warehouse demo above and the full-atrium crowd. No spatial crop was
+used: crops were measured during selection and rejected, because
+enlarging part of this high-angle frame makes *more* shoppers
+detectable, not fewer (an 854×480 crop of the foreground measured a
+median of 17 detections per frame). Results on the segment: 149
+person tracks — fragmentation is still heavy, because the tracked
+shoppers constantly occlude each other — with **LONG DWELL ×1**
+(ID 150, zone D2: a man standing at the glass railing, flagged at
+17.9 s of the segment), longest dwell 12.0 s, highest score 26, and
+no RISK FLAG. REPEATED REACH, ITEM VANISHED and RAPID EXIT did
+**not** fire on this segment either, and that is reported as-is —
+the dwell is the one behaviour this scene cleanly demonstrates.
+This run ships as `mall-shoplifting-detection-demo-smallshop.mp4`
+with its log `mall-shoplifting-detection-events-smallshop.log`.
+
 ## Files
 
 - `mall_shoplifting_detection.py` — the whole system (single file)
