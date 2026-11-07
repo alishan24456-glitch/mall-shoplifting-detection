@@ -65,21 +65,35 @@ by Ultralytics on first use if missing), `--max-seconds 30`,
 LONG DWELL ×3, REPEATED REACH ×1, ITEM VANISHED ×1, RAPID EXIT ×1
 (carrier left at 317 px/s); longest dwell 17.1 s; highest score 80.
 
-**Real footage (busy mall atrium, 720p, first 30 s / 915 frames):**
-**Real footage (busy mall atrium, 720p, first 30 s / 916 frames, default
-ByteTrack):** 216 person tracks — ByteTrack fragments IDs heavily in a
-crowd this dense — with **LONG DWELL ×1** (ID 278, zone D2, flagged at
-27.5 s), longest dwell 11.3 s, highest score 26, and no RISK FLAG.
-REPEATED REACH, ITEM VANISHED and RAPID EXIT did **not** fire on this
-clip, and that is reported as-is: at this wide angle YOLOv8n rarely
-resolves carried items on people this small, and stationary shoppers'
-box-height changes stay under the reach threshold. A crowd-tuned tracker
-config (`bytetrack_mall.yaml`, longer track buffer, selectable with
-`--tracker`) was also tried: it cut fragmentation to 53 tracks, but the
-followed boxes wandered between neighbours, zone stays shortened
-(max dwell 5.5 s) and no dwell flag fired — so the default-tracker run
-above is the shipped demo. The simulation run is where the full
-four-signal chain is demonstrated end to end.
+**Real footage — primary demo (single shopper in a store aisle,
+1280×676, full clip 20.1 s / 503 frames, default settings):** one man
+pushing a shopping cart between stocked shelves, tracked as a single
+stable ID for essentially the whole clip — **2 person tracks** in total,
+versus 216 in the crowd test below. Results: **LONG DWELL ×1** (ID 1,
+zone C4, flagged at 16.0 s), longest dwell 14.0 s, highest score 29,
+and no RISK FLAG — the shopper ended just below the WATCH threshold of
+30. REPEATED REACH, ITEM VANISHED and RAPID EXIT did **not** fire, and
+that is reported as-is: he carries no detectable item (the cart is not
+a COCO carried class) and never exits at speed. What the sparse scene
+does show cleanly is the tracking quality the risk engine depends on —
+one unbroken track, a steadily counting dwell timer and a per-zone stay
+measured end to end. This run ships as
+`mall-shoplifting-detection-demo.mp4`.
+
+**Real footage — dense-crowd test (busy mall atrium, 720p, first 30 s /
+916 frames, default ByteTrack):** 216 person tracks — ByteTrack
+fragments IDs heavily in a crowd this dense — with **LONG DWELL ×1**
+(ID 278, zone D2, flagged at 27.5 s), longest dwell 11.3 s, highest
+score 26, and no RISK FLAG. REPEATED REACH, ITEM VANISHED and RAPID
+EXIT did **not** fire on this clip either: at this wide angle YOLOv8n
+rarely resolves carried items on people this small, and stationary
+shoppers' box-height changes stay under the reach threshold. A
+crowd-tuned tracker config (`bytetrack_mall.yaml`, longer track buffer,
+selectable with `--tracker`) was also tried: it cut fragmentation to
+53 tracks, but the followed boxes wandered between neighbours, zone
+stays shortened (max dwell 5.5 s) and no dwell flag fired. This run is
+kept as `mall-shoplifting-detection-demo-crowded.mp4`. The simulation
+run is where the full four-signal chain is demonstrated end to end.
 
 ## Files
 
